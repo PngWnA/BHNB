@@ -15,5 +15,5 @@ for row in rows[1:]:
         payload.append(dict(reduced))
 
 # Write to json
-dst = open("reduced", "w")
+dst = open("reduced.json", "w")
 dst.write(json.dumps(payload, indent = 4))
