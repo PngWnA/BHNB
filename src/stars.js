@@ -14,7 +14,7 @@ Example of a star object is:
 
 // Where to load json file.
 // It can be changed.
-const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/reduced.json';
+const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/small.json';
 
 // init : path -> star*
 const init = async (path=PATH) => {
