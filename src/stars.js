@@ -16,7 +16,7 @@ Example of a star object is:
 // It can be changed.
 const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/small.json';
 
-// init : path -> star*
+// init : path -> star*.length
 const init = async (path=PATH) => {
     const response = await fetch(path);
     console.log('[*] Init.');
@@ -32,5 +32,5 @@ const load = (stars) => {
         document.getElementById("stars").append(elem);
     });
     console.log(`[*] Loaded ${stars.length} stars.`);
-    return;
+    return stars.length;
 };
