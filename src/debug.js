@@ -1,3 +1,4 @@
+// For test
 const getAlpheratz = () => {
     const sun = document.getElementsByTagName("star")[1];
     return sun;
