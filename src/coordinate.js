@@ -1,5 +1,8 @@
 // Thx to Suho Lee for nice reference.
 
+const r2d = rad => rad * 180 / Math.PI;
+const d2r = degree => degree * Math.PI / 180;
+
 // getGeographic : ip -> {lat, long}
 const getLocalGeographic = async () => {
     const endpoint = `http://ip-api.com/json/`
@@ -47,28 +50,44 @@ const getLocalSidereal = (long) => {
 
 // equatorialToHorizontal : lat -> LST -> star -> {az, alt}
 const equatorialToHorizontal = (lat, LST, star) =>{
-
-    console.log(LST, LST*15);
+    /*
+    * ra : hour
+    * dec : -90 ~ +90
+    * lat : -90 ~ +90
+    * LST : hour
+    * az : 360
+    * alt : -90 ~ +90
+    * HA : 0 ~ 360
+    */
 
     const ra = star.getAttribute('ra');
     const dec = star.getAttribute('dec');
 
-    // Convert LST to angle.
-    const HA = (LST * 15 - ra);
+    // Convert HA to angle.
+    const HA = (LST - ra) * 15 % 360;
 
     // For readability.
-    const {sin, cos, tan, asin, atan2} = Math;
+    const {sin, cos, tan, asin, acos, atan2} = Math;
 
-    const Azimuth = atan2(
-        sin(HA),
-        cos(HA) * sin(lat) + tan(dec) * cos(lat)
-        ) * 180 / Math.PI;
-    const Altitude = asin(
-        sin(lat) * sin(dec)
-        + cos(lat) * cos(dec) * cos(HA)
-    ) * 180 / Math.PI;
+    const Altitude = r2d(asin(
+        sin(d2r(dec)) * sin(d2r(lat))
+        + cos(d2r(dec)) * cos(d2r(lat)) * cos(d2r(HA))
+    ));
 
-    console.log(ra, dec, HA, Azimuth, Altitude);
+    const Azimuth = (r2d(asin(
+        - sin(d2r(HA)) * cos(d2r(dec))
+        / cos(d2r(Altitude))
+    ))  + 360) % 360;
+
+    const realAz = 300 + 0.20 * 10 / 6;
+    const realAlt = 8 + 0.30 * 10 / 6;
+
+    console.log(`
+    Azimuth : ${Azimuth}
+    Altitude : ${Altitude}
+    Err(Az) : ${(realAz - Azimuth) / 360}
+    Err(Alt) : ${(realAlt - Altitude) / 180}
+    `);
 
     return {Azimuth, Altitude};
 };
