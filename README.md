@@ -5,7 +5,7 @@
 ### Preprocessing
 ```
 stars = filter([bright <= 7.9 ?], HYG-database)
-save(star[id, ra, dec, proper, ci, mag])
+save(star[ra, dec, proper, mag])
 ```
 
 ### load stars in html
@@ -16,7 +16,16 @@ foreach stars:
 ```
 
 ### convert equatorial systems to horizontal system.
-어캐하지
+```
+{lat, long} = getGeographic()
+LST = getSiderealTime()
+
+stars.map(convertToEquatorial(lat, LST))
+```
 
 ### project horizontal system in browser
-어캐하누
+```
+random projection : literally random location
+simple projection(celestial map) : {x, y} = {az, alt}
+ground projection : ???
+```
