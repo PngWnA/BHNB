@@ -1,8 +1,5 @@
 // Thx to Suho Lee for nice reference.
 
-const r2d = rad => rad * 180 / Math.PI;
-const d2r = degree => degree * Math.PI / 180;
-
 // getGeographic : ip -> {lat, long}
 const getLocalGeographic = async () => {
     const endpoint = `http://ip-api.com/json/`
