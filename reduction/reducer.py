@@ -15,11 +15,14 @@ rows = list(rows)
 
 # Reduction
 payload = list()
-indexes = [id, ra, dec, proper, ci, mag] = [rows[0].index(attr) for attr in ["id", "ra", "dec", "proper", "ci", "mag"]]
+indexes = [ra, dec, proper, mag] = [rows[0].index(attr) for attr in ["ra", "dec", "proper", "mag"]]
 for row in rows[1:]:
     if float(row[mag]) <= float(sys.argv[1]):
         reduced = zip([rows[0][index] for index in indexes],[row[index] for index in indexes])
         payload.append(dict(reduced))
+
+# Remove Sun!!!
+payload = payload[1:]
 
 # Write to json
 dst = open("reduced.json", "w")
