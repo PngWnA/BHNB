@@ -28,7 +28,7 @@ const setCelestialMap = async (star) => {
     return;
 };
 
-const setGroundMap = async () => {
+const setGroundMap = async () => { 
     return;
 };
 
