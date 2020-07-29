@@ -4,12 +4,22 @@ const getAlpheratz = () => {
     return sun;
 }
 
+const convertAll = () => {
+    const stars = document.getElementsByTagName("star");
+    console.log(`[*] Converting...`)
+    const { innerWidth, innerHeight } = window;
+    for (let index = 0; index < stars.length; index++) {
+        equatorialToHorizontal(this.geo.lat, this.LST, stars[index]);
+    }
+    return;
+};
+
 
 init()
 .then(async (stars) => await (load(stars)))
 .then(async (stars) => await (projectTest(stars)))
 .then(async () => this.geo = await getLocalGeographic())
 .then(async () => this.LST = getLocalSidereal(this.geo.lon))
-.then(async () => equatorialToHorizontal(this.geo.lat, this.LST, getAlpheratz()))
-.then(async (azalt) => console.log(azalt))
+.then(async () => convertAll())
+.then(async () => console.log(`Done`))
 .catch(err => console.log(err));

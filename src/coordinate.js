@@ -79,6 +79,7 @@ const equatorialToHorizontal = (lat, LST, star) =>{
         / cos(d2r(Altitude))
     ))  + 360) % 360;
 
+    /*
     const realAz = 300 + 0.20 * 10 / 6;
     const realAlt = 8 + 0.30 * 10 / 6;
 
@@ -88,6 +89,10 @@ const equatorialToHorizontal = (lat, LST, star) =>{
     Err(Az) : ${(realAz - Azimuth) / 360}
     Err(Alt) : ${(realAlt - Altitude) / 180}
     `);
+    */
+
+    star.setAttribute('az', Azimuth);
+    star.setAttribute('alt', Altitude);
 
     return {Azimuth, Altitude};
 };
