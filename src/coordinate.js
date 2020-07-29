@@ -2,8 +2,8 @@
 
 // getGeographic : ip -> {lat, long}
 const getLocalGeographic = async () => {
-    const endpoint = `http://ip-api.com/json/`
-    const base = {lat: 37.582474, long: 127.027560};
+    const endpoint = `https://ip-api.com/json/`
+    const base = {lat: 37.582474, lon: 127.027560};
 
     await fetch(endpoint)
     .then(res => this.geography = res.json())
