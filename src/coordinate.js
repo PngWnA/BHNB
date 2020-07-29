@@ -74,22 +74,10 @@ const equatorialToHorizontal = (lat, LST, star) =>{
         + cos(d2r(dec)) * cos(d2r(lat)) * cos(d2r(HA))
     ));
 
-    const Azimuth = (r2d(asin(
-        - sin(d2r(HA)) * cos(d2r(dec))
-        / cos(d2r(Altitude))
-    ))  + 360) % 360;
-
-    /*
-    const realAz = 300 + 0.20 * 10 / 6;
-    const realAlt = 8 + 0.30 * 10 / 6;
-
-    console.log(`
-    Azimuth : ${Azimuth}
-    Altitude : ${Altitude}
-    Err(Az) : ${(realAz - Azimuth) / 360}
-    Err(Alt) : ${(realAlt - Altitude) / 180}
-    `);
-    */
+    const Azimuth = r2d(atan2(
+        sin(d2r(HA)),
+        cos(d2r(HA)) * sin(d2r(lat)) - tan(d2r(dec)) * cos(d2r(lat))
+    )) + 180
 
     star.setAttribute('az', Azimuth);
     star.setAttribute('alt', Altitude);
@@ -97,3 +85,12 @@ const equatorialToHorizontal = (lat, LST, star) =>{
     return {Azimuth, Altitude};
 };
 
+const convertAllEquatorial = () => {
+    const stars = document.getElementsByTagName("star");
+    console.log(`[*] Converting...`)
+    const { innerWidth, innerHeight } = window;
+    for (let index = 0; index < stars.length; index++) {
+        equatorialToHorizontal(this.geo.lat, this.LST, stars[index]);
+    }
+    return;
+};

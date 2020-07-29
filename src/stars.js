@@ -14,7 +14,7 @@ Example of a star object is:
 
 // Where to load json file.
 // It can be changed.
-const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/small.json';
+const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/halflarge.json';
 
 // init : path -> star*.length
 const init = async (path=PATH) => {
@@ -29,6 +29,8 @@ const load = (stars) => {
         const elem = document.createElement('star');
         elem.setAttribute('ra', star.ra);
         elem.setAttribute('dec', star.dec);
+        elem.setAttribute('mag', star.mag);
+        elem.setAttribute('aka', star.proper);
         document.getElementById("stars").append(elem);
     });
     console.log(`[*] Loaded ${stars.length} stars.`);
