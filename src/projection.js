@@ -8,7 +8,7 @@ const HD = {
     height: 1080,
 };
 
-const brightness = mag => Math.min(6.0, (-10/9) * mag + (21/3));;
+const brightness = mag => Math.min(6.0, (-11/9) * mag + (21/3));;
 
 const setRandomMap = async (star) => {
     star.style.left = `${innerWidth * Math.random()}px`;
