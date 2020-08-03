@@ -1,8 +1,9 @@
 @import url(https://cdn.jsdelivr.net/npm/font-kopub@1.0/kopubdotum.min.css);
 
-body
+html, body
 {
     height: 100%;
+    overflow: hidden;
 
     background: rgb(2,0,36);
     background: linear-gradient(rgba(2,0,36,1) 0%, rgba(14,81,94,1) 100%);
@@ -25,6 +26,8 @@ star
     background-color: white;
     border-color: white;
     border-radius: 50%;
+
+    box-shadow: inset 0px 0px 10px 10px #FFFFFF;
 
     position: absolute;
 }
