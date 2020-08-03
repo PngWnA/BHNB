@@ -8,8 +8,6 @@ const HD = {
     height: 1080,
 };
 
-const scale = 300.0;
-
 const brightness = mag => (-10/9) * mag + (15/3);
 
 const setRandomMap = async (star) => {
@@ -32,29 +30,25 @@ const setCelestialMap = async (star) => {
     return;
 };
 
-const setGroundMap = async (star) => {
-    throw new Exception("NOT_IMPLEMENTED");
+const setGroundMap = async (star, fov="N") => {
     const az = star.getAttribute('az');
     const alt = star.getAttribute('alt');
     const mag = star.getAttribute('mag');
 
-    if ((-90 <= alt && alt <= 0)) {
+    const {x, y, z} = azaltToCatesian(az, alt);
+
+    const Y = y / (1+x);
+    const Z = z / (1+x);
+
+    if ((90 <= az && az <= 270)) {
         star.style.left = `${-1}px`;
         star.style.top = `${-1}px`;
         star.style.height = star.style.width = `0px`;
         return;
     }
 
-    const zenith = (alt - 90.0) * (+ Math.PI) / 180.0;
-
-    const R = sin(zenith) / (1 + cos(zenith));
-    if (R >= 1) {
-        console.log(R);
-    }
-    const theta = (-az + 360) % 360;
-
-    star.style.left = `${innerWidth / 2 + scale * R * cos(theta)}px`;
-    star.style.top = `${innerHeight / 2 + scale * R * sin(theta)}px`;
+    star.style.left = `${innerWidth / 2 + Y * scale}px`;
+    star.style.top = `${innerHeight / 2 + Z * scale}px`;
     star.style.height = star.style.width = `${brightness(mag)}px`;
 
     return;

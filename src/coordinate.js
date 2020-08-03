@@ -2,7 +2,7 @@
 
 // getGeographic : ip -> {lat, long}
 const getLocalGeographic = async () => {
-    const endpoint = `https://ip-api.com/json/`
+    const endpoint = `http://ip-api.com/json/`
     const base = {lat: 37.582474, lon: 127.027560};
 
     await fetch(endpoint)
@@ -80,6 +80,17 @@ const equatorialToHorizontal = (lat, LST, star) =>{
     star.setAttribute('alt', Altitude);
 
     return {Azimuth, Altitude};
+};
+
+const azaltToCatesian = (az, alt) => {
+    const pi = az;
+    const theta = -alt + 90;
+
+    const x = sin(d2r(theta)) * cos(d2r(pi));
+    const y = sin(d2r(theta)) * sin(d2r(pi));
+    const z = -cos(d2r(theta));
+
+    return {x, y, z}
 };
 
 const convertAllEquatorial = () => {
