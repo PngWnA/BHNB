@@ -83,12 +83,12 @@ const equatorialToHorizontal = (lat, LST, star) =>{
 };
 
 const azaltToCatesian = (az, alt) => {
-    const pi = az;
+    const pi = (-az + 360) % 360;
     const theta = -alt + 90;
 
     const x = sin(d2r(theta)) * cos(d2r(pi));
     const y = sin(d2r(theta)) * sin(d2r(pi));
-    const z = -cos(d2r(theta));
+    const z = cos(d2r(theta));
 
     return {x, y, z}
 };

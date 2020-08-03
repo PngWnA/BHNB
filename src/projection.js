@@ -8,7 +8,7 @@ const HD = {
     height: 1080,
 };
 
-const brightness = mag => (-10/9) * mag + (15/3);
+const brightness = mag => Math.min(6.0, (-10/9) * mag + (21/3));;
 
 const setRandomMap = async (star) => {
     star.style.left = `${innerWidth * Math.random()}px`;
@@ -40,15 +40,21 @@ const setGroundMap = async (star, fov="N") => {
     const Y = y / (1+x);
     const Z = z / (1+x);
 
+    const W = innerWidth / 2;
+    const H = innerHeight;
+    const scale = Math.sqrt(W*W + H*H);
+
     if ((90 <= az && az <= 270)) {
-        star.style.left = `${-1}px`;
-        star.style.top = `${-1}px`;
+        star.style.height = star.style.width = `0px`;
+        return;
+    }
+    if ((90 <= az && az <= 270)) {
         star.style.height = star.style.width = `0px`;
         return;
     }
 
-    star.style.left = `${innerWidth / 2 + Y * scale}px`;
-    star.style.top = `${innerHeight / 2 + Z * scale}px`;
+    star.style.left = `${innerWidth / 2 - Y * scale}px`;
+    star.style.top = `${innerHeight - Z * scale}px`;
     star.style.height = star.style.width = `${brightness(mag)}px`;
 
     return;
