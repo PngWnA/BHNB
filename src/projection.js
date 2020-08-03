@@ -21,7 +21,7 @@ const setCelestialMap = async (star) => {
     const alt = star.getAttribute('alt');
     const mag = star.getAttribute('mag');
 
-    star.style.left = `${az / 360 * innerWidth}px`;
+    star.style.left = `${((az / 360) + 0.5) % 1.0 * innerWidth}px`;
     star.style.top = `${(-alt + 90) / 180 * innerHeight}px`;
     star.style.height = star.style.width = `${(-10/9) * mag + (15/3)}px`;
 
