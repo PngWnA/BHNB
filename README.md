@@ -27,5 +27,5 @@ stars.map(convertToEquatorial(lat, LST))
 ```
 random projection : literally random location
 simple projection(celestial map) : {x, y} = {az, alt}
-ground projection : ???
+ground projection : DO stereographic projection
 ```
