@@ -35,7 +35,7 @@ const setCelestialMap = async (star) => {
     return;
 };
 
-// setCelestialMap : fov -> star* -> star*
+// setGroundMap : fov -> star* -> star*
 const setGroundMap = async (star, fov="N") => {
     const az = star.getAttribute('az');
     const alt = star.getAttribute('alt');
@@ -67,15 +67,15 @@ const setGroundMap = async (star, fov="N") => {
     const W = innerWidth / 2;
     const H = innerHeight;
     const scale = Math.sqrt(W*W + H*H);
-
+    
     // Filter out half sphere
     if ((start <= az && az <= end)) {
         star.style.height = star.style.width = `0px`;
         return;
     }
 
-    star.style.left = `${innerWidth / 2 - Y * scale}px`;
-    star.style.top = `${innerHeight - Z * scale}px`;
+    star.style.left = `${W - Y * scale}px`;
+    star.style.top = `${H - Z * scale}px`;
     star.style.height = star.style.width = `${brightness(mag)}px`;
 
     return;
