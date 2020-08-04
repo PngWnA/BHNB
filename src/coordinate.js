@@ -97,7 +97,6 @@ const azaltToCatesian = (az, alt) => {
 // azaltToCatesian : star* -> star*
 const convertAllEquatorial = () => {
     const stars = document.getElementsByTagName("star");
-    console.log(`[*] Converting...`)
     const { innerWidth, innerHeight } = window;
     for (let index = 0; index < stars.length; index++) {
         equatorialToHorizontal(this.geo.lat, this.LST, stars[index]);

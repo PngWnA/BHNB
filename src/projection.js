@@ -1,6 +1,6 @@
 // Thx to Daehyun Pyo for nice reference.
 
-const {
+let {
     innerWidth,
     innerHeight,
 } = window;
@@ -84,7 +84,7 @@ const setGroundMap = async (star, fov="N") => {
 //project : mode -> star*
 const project = async (mode) => {
     const stars = document.getElementsByTagName("star");
-    console.log(`[*] Projecting ${stars.length} stars with ${mode} mode...`);
+    console.log(`[Core] Projecting ${stars.length} stars with ${mode} mode...`);
     for (let star of stars) {
         switch (mode) {
             case `RandomMap`:
