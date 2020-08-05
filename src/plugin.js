@@ -41,7 +41,7 @@ const windowSizeMonitor = () => {
             
             timerFlag = false;
             console.log(`[Plugin::followSizeChange] Finished routine.`)
-        }, 100);
+        }, 50);
     }
     else
     {
@@ -50,8 +50,8 @@ const windowSizeMonitor = () => {
 }
 
 const followSizeChange = () => {
-    console.log(`[Plugin::followSizeChange] Activated.`)
-    window.addEventListener("resize", windowSizeMonitor)
+    console.log(`[Plugin::followSizeChange] Activated.`);
+    window.addEventListener("resize", windowSizeMonitor);
 };
 
 
