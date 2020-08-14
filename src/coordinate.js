@@ -82,6 +82,7 @@ const equatorialToHorizontal = (lat, LST, star) =>{
     return {Azimuth, Altitude};
 };
 
+// azaltToCatesian : az -> alt -> {x, y, z}
 const azaltToCatesian = (az, alt) => {
     const pi = (-az + 360) % 360;
     const theta = -alt + 90;
@@ -93,9 +94,9 @@ const azaltToCatesian = (az, alt) => {
     return {x, y, z}
 };
 
+// azaltToCatesian : star* -> star*
 const convertAllEquatorial = () => {
     const stars = document.getElementsByTagName("star");
-    console.log(`[*] Converting...`)
     const { innerWidth, innerHeight } = window;
     for (let index = 0; index < stars.length; index++) {
         equatorialToHorizontal(this.geo.lat, this.LST, stars[index]);

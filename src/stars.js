@@ -3,23 +3,21 @@
 A star object is expressed as json.
 Example of a star object is:
 {
-    "id": "0",
     "ra": "0.000000",
     "dec": "0.000000",
     "proper": "Sol",
-    "ci": "0.656",
     "mag": "-26.700"
 }   
 */
 
 // Where to load json file.
 // It can be changed.
-const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/large.json';
+const PATH = 'https://raw.githubusercontent.com/PngWnA/BHNB/master/resources/halflarge.json';
 
 // init : path -> star*.length
 const init = async (path=PATH) => {
     const response = await fetch(path);
-    console.log('[*] Init.');
+    console.log('[Core] Initiated.');
     return response.json();
 };
 
@@ -31,8 +29,9 @@ const load = (stars) => {
         elem.setAttribute('dec', star.dec);
         elem.setAttribute('mag', star.mag);
         elem.setAttribute('aka', star.proper);
+        elem.style.animation = `flicker ${Math.random() * 2 + 2}s infinite alternate`;
         document.getElementById("stars").append(elem);
     });
-    console.log(`[*] Loaded ${stars.length} stars.`);
+    console.log(`[Core] Loaded ${stars.length} stars.`);
     return stars.length;
 };

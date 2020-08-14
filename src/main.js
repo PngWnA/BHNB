@@ -1,0 +1,11 @@
+init()
+.then(async (stars) => await (load(stars)))
+.then(async () => this.geo = await getLocalGeographic())
+.then(async () => this.LST = getLocalSidereal(this.geo.lon))
+.then(async () => console.log(`[Core] Converting: RaDec -> AzAlt`))
+.then(async () => convertAllEquatorial())
+.then(async () => project(`GroundMap`))
+.then(async () => console.log(`[Core] Initial rendering is done.`))
+.then(async () => followSizeChange())
+.then(async () => continuousUpdate())
+.catch(err => console.log(err));

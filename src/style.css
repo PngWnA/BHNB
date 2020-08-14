@@ -9,10 +9,11 @@ html, body
     background: linear-gradient(rgba(2,0,36,1) 0%, rgba(14,81,94,1) 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    
+
 }
-.poem
+.contents
 {
-    width: 30%;
     
     color: white;
     position: absolute;
@@ -21,13 +22,20 @@ html, body
     font-family: 'KoPub Dotum';
 }
 
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
 star
 {   
     background-color: white;
     border-color: white;
     border-radius: 50%;
-
-    box-shadow: inset 0px 0px 10px 10px #FFFFFF;
+    /* Remove comment if you need *soft* stars */
+    /* filter: drop-shadow(0px 0px 1px white); */
 
     position: absolute;
 }

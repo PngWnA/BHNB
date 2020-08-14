@@ -1,6 +1,8 @@
-const {
+// Thx to Daehyun Pyo for nice reference.
+
+let {
     innerWidth,
-    innerHeight
+    innerHeight,
 } = window;
 
 const HD = {
@@ -8,8 +10,10 @@ const HD = {
     height: 1080,
 };
 
-const brightness = mag => Math.min(6.0, (-10/9) * mag + (21/3));;
+// brightness : mag -> size
+const brightness = mag => Math.min(6.0, (-11/9) * mag + (21/3));;
 
+// setRandomMap : star* -> star*
 const setRandomMap = async (star) => {
     star.style.left = `${innerWidth * Math.random()}px`;
     star.style.top = `${innerHeight * Math.random()}px`;
@@ -18,6 +22,7 @@ const setRandomMap = async (star) => {
     return;
 };
 
+// setCelestialMap : star* -> star*
 const setCelestialMap = async (star) => {
     const az = star.getAttribute('az');
     const alt = star.getAttribute('alt');
@@ -30,6 +35,7 @@ const setCelestialMap = async (star) => {
     return;
 };
 
+// setGroundMap : fov -> star* -> star*
 const setGroundMap = async (star, fov="N") => {
     const az = star.getAttribute('az');
     const alt = star.getAttribute('alt');
@@ -37,32 +43,48 @@ const setGroundMap = async (star, fov="N") => {
 
     const {x, y, z} = azaltToCatesian(az, alt);
 
-    const Y = y / (1+x);
-    const Z = z / (1+x);
+    let start, end;
+
+    let Y, Z;
+
+    if (fov === "N") {
+        start = 90;
+        end = 270;
+        factor = 1 + x;
+
+        Y = y / factor;
+        Z = z / factor;
+    }
+    else {
+        start = 270;
+        end = 90;
+        factor = 1 - x;
+
+        Y = - y / factor;
+        Z = z / factor;
+    }
 
     const W = innerWidth / 2;
     const H = innerHeight;
     const scale = Math.sqrt(W*W + H*H);
-
-    if ((90 <= az && az <= 270)) {
-        star.style.height = star.style.width = `0px`;
-        return;
-    }
-    if ((90 <= az && az <= 270)) {
+    
+    // Filter out half sphere
+    if ((start <= az && az <= end)) {
         star.style.height = star.style.width = `0px`;
         return;
     }
 
-    star.style.left = `${innerWidth / 2 - Y * scale}px`;
-    star.style.top = `${innerHeight - Z * scale}px`;
+    star.style.left = `${W - Y * scale}px`;
+    star.style.top = `${H - Z * scale}px`;
     star.style.height = star.style.width = `${brightness(mag)}px`;
 
     return;
 };
 
+//project : mode -> star*
 const project = async (mode) => {
     const stars = document.getElementsByTagName("star");
-    console.log(`[*] Projecting ${stars.length} stars with ${mode} mode...`);
+    console.log(`[Core] Projecting ${stars.length} stars with ${mode} mode...`);
     for (let star of stars) {
         switch (mode) {
             case `RandomMap`:
