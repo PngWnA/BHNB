@@ -1,5 +1,5 @@
 # BHNB
-별헤는밤.
+별 헤는 밤.
 
 ## Strategy (pseudo)
 ### Preprocessing
