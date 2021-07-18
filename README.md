@@ -1,6 +1,8 @@
 # BHNB
 별 헤는 밤.
 
+Refer [here](https://pngwna.github.io/dev/bhnb/0) for more information.
+
 ## Strategy (pseudo)
 ### Preprocessing
 ```
