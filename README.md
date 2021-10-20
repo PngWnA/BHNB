@@ -1,6 +1,7 @@
 # BHNB
 별 헤는 밤.
 
+Live demo on [here](https://pngwna.github.io/showcase/bhnb/)!
 Refer [here](https://pngwna.github.io/dev/bhnb/0) for more information.
 
 ## Strategy (pseudo)
